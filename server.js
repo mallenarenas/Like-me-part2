@@ -47,7 +47,7 @@ app.put("/posts/:id", async (req, res) => {
         }
     })
 
-app.patch("/posts/:id/likes", async (req, res) => {
+app.put("/posts/like/:id", async (req, res) => {
     const { id } = req.params
     try {
       await incrementLikes(id)
