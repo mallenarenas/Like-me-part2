@@ -21,8 +21,8 @@ res.json(posts)
 
 app.post("/posts", async (req, res) => {
     try{
-    const {title, url, description, likes } = req.body
-    await addPost(title, url, description, likes)
+    const {title, url, description } = req.body
+    await addPost(title, url, description, 0)
     res.send("Post agregado con éxito")
     }
     catch (error) {
