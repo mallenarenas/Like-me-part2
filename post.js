@@ -10,6 +10,15 @@ const getDate = async () => {
 getDate()
 
 const addPost = async (title, img, description, likes) => {
+    if (typeof title !== "string") {
+        throw new Error("El título debe ser una cadena de texto");
+      }
+    if (typeof img !== "string") {
+        throw new Error("La URL de la imagen debe ser una cadena de texto");
+      }
+    if (typeof description !== "string") {
+        throw new Error("La descripción debe ser una cadena de texto");
+    }
     const query = "INSERT INTO posts (id, title, img, description, likes) VALUES (DEFAULT, $1, $2, $3, $4) RETURNING *"
     const values = [title, img, description, likes]
     try{
