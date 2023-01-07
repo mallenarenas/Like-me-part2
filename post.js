@@ -57,9 +57,19 @@ const updateLikes = async (likes, id) => {
         }
     }
 
+const incrementLikes = async (id) => {
+    const consulta = "UPDATE posts SET likes = likes + 1 WHERE id = $1"
+    const values = [id]
+    const { rowCount } = await pool.query(consulta, values)
+    if (rowCount === 0) {
+      throw { code: 404, message: "No se consiguió ningún post con este id" }
+    }
+}
+
+
 const deletePost = async (id) => {
     const consulta = "DELETE FROM posts WHERE id = $1"
     const values = [id]
     const result = await pool.query(consulta, values)
     }
-module.exports = { addPost, getPosts, updateLikes, deletePost }
+module.exports = { addPost, getPosts, updateLikes, deletePost, incrementLikes }

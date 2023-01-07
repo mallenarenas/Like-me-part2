@@ -1,4 +1,4 @@
-const { addPost, getPosts, updateLikes, deletePost } = require('./post')
+const { addPost, getPosts, updateLikes, deletePost, incrementLikes } = require('./post')
 const express = require('express');
 const cors = require('cors')
 
@@ -46,6 +46,16 @@ app.put("/posts/:id", async (req, res) => {
         res.status(code).send(message)
         }
     })
+
+app.patch("/posts/:id/likes", async (req, res) => {
+    const { id } = req.params
+    try {
+      await incrementLikes(id)
+      res.send("Likes aumentados con éxito")
+    } catch ({ code, message }) {
+      res.status(code).send(message)
+    }
+  })
 
 app.delete("/posts/:id", async (req, res) => {
     const { id } = req.params
