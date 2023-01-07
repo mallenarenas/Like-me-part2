@@ -1,8 +1,12 @@
 const pool = require("./singletonPatern").getInstance();
 
 const getDate = async () => {
-const result = await pool.query("SELECT NOW()")
-}
+    try{
+        const result = await pool.query("SELECT NOW()")
+    } catch(e){
+        console.error(`Error al obtener la fecha actual: ${e.message}`)
+    }
+    }
 getDate()
 
 const addPost = async (title, img, description, likes) => {
